@@ -32,9 +32,13 @@ import hickle as hkl
 weights = hkl.load('resnet-18-export.hkl')
 ```
 
-And the `weights` will be a dict of numpy arrays. See the notebooks for more
-examples.
+Unfortunately, hickle py3 support is not yet ready, so the models will be resaved in torch pickle format with `torch.utils.model_zoo.load_url` support, e.g.:
 
+```python
+weights = model_zoo.load_url('https://s3.amazonaws.com/modelzoo-networks/wide-resnet-50-2-export-5ae25d50.pth')
+```
+
+Also, `make_dot` was moved to a separate package: [PyTorchViz](https://github.com/szagoruyko/pytorchviz)
 
 ### Folded
 
@@ -45,6 +49,7 @@ layers for speed. It is not recommended to use them for finetuning.
 
 | model | notebook | val error | download | size |
 |:------|:--------:|:--------:|:--------:|:----:|
+| VGG-16 | [vgg-16.ipynb](vgg-16.ipynb) | 30.09, 10.69 | url coming | 528 MB |
 | NIN | [nin-export.ipynb](nin-export.ipynb) | 32.96, 12.29 | [url](https://s3.amazonaws.com/pytorch/h5models/nin-export.hkl) | 33 MB |
 | ResNet-18 (fb) | [resnet-18-export.ipynb](resnet-18-export.ipynb) | 30.43, 10.76 | [url](https://s3.amazonaws.com/pytorch/h5models/resnet-18-export.hkl) | 42 MB |
 | ResNet-18-AT | [resnet-18-at-export.ipynb](resnet-18-at-export.ipynb) | 29.44, 10.12 | [url](https://www.dropbox.com/s/z092wmrgyqn4ys5/resnet-18-at-export.hkl?dl=0) | 44.1 MB |
